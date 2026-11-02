@@ -1,0 +1,192 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+
+/* Brand colors and the font used across the whole project */
+@theme {
+    --font-sans: "Inter Variable", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+
+    --color-brand-50: #f0fdfa;
+    --color-brand-100: #ccfbf1;
+    --color-brand-200: #99f6e4;
+    --color-brand-500: #14b8a6;
+    --color-brand-600: #0d9488;
+    --color-brand-700: #0f766e;
+    --color-brand-800: #115e59;
+    --color-brand-900: #134e4a;
+}
+
+@layer base {
+    /* Text size. The user picks Small / Normal / Large in the user menu.
+       Sizes are in rem, so the whole screen grows or shrinks together. */
+    html {
+        font-size: 16px;
+    }
+    html[data-text="small"] {
+        font-size: 15px;
+    }
+    html[data-text="large"] {
+        font-size: 18px;
+    }
+
+    body {
+        @apply bg-slate-50 text-slate-700 antialiased;
+        font-size: 0.875rem; /* 14px: one body size everywhere */
+        line-height: 1.5;
+    }
+
+    /* Headings without their own size classes */
+    h1 {
+        @apply text-slate-900;
+        font-size: 1.375rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+    }
+    h2 {
+        @apply text-slate-900;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        font-weight: 600;
+    }
+    h3 {
+        font-size: 0.9375rem;
+        line-height: 1.375rem;
+        font-weight: 600;
+    }
+
+    /* Digits of the same width, so amounts line up in columns */
+    .table-base td,
+    .table-base th,
+    input[type="number"],
+    .tabular,
+    .card .text-2xl,
+    .card .text-xl {
+        font-variant-numeric: tabular-nums;
+    }
+    .card .text-2xl,
+    .card .text-xl {
+        letter-spacing: -0.01em;
+    }
+
+    /* Number fields without the tiny up/down arrows */
+    input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    ::selection {
+        background: rgb(20 184 166 / 0.25);
+    }
+}
+
+@layer components {
+    /* Buttons: every button has a border, so primary and secondary buttons are the same height */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg border border-transparent px-4 py-2 text-sm font-medium whitespace-nowrap transition
+               focus:outline-none focus:ring-2 focus:ring-brand-500/40 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+    .btn-primary { @apply border-brand-600 bg-brand-600 text-white shadow-sm hover:border-brand-700 hover:bg-brand-700; }
+    .btn-secondary { @apply border-slate-300 bg-white text-slate-700 shadow-sm hover:bg-slate-50; }
+    .btn-danger { @apply border-red-600 bg-red-600 text-white shadow-sm hover:border-red-700 hover:bg-red-700; }
+
+    /* Compact icon buttons (table actions) */
+    .icon-btn {
+        @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition
+               hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/40;
+    }
+    .icon-btn-danger { @apply hover:bg-red-50 hover:text-red-600; }
+
+    /* Card */
+    .card { @apply rounded-xl border border-slate-200 bg-white shadow-sm; }
+    .card-body { @apply p-5; }
+
+    /* Form */
+    .form-label { @apply mb-1.5 block text-[0.8125rem] font-medium text-slate-700; }
+    .form-input {
+        @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm transition
+               placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30
+               disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500;
+    }
+    .form-error { @apply mt-1 text-xs text-red-600; }
+
+    /* Badges */
+    .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap; }
+    .badge-success { @apply bg-emerald-100 text-emerald-700; }
+    .badge-warning { @apply bg-amber-100 text-amber-700; }
+    .badge-danger { @apply bg-red-100 text-red-700; }
+
+    /* Tables */
+    .table-base { @apply w-full text-left text-sm; }
+    .table-base thead { @apply bg-slate-50 text-[0.6875rem] font-semibold uppercase tracking-wider text-slate-500; }
+    .table-base th { @apply whitespace-nowrap; }
+    .table-base th, .table-base td { @apply px-4 py-3; }
+    .table-base tbody tr { @apply border-t border-slate-100 hover:bg-slate-50; }
+}
+
+/* ===== Elegant scrollbars ===== */
+
+/* Whole page */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Sidebar: very thin, shows a faint line only when the mouse is over it */
+.sidebar-scroll {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+.sidebar-scroll:hover {
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+.sidebar-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 9999px;
+}
+.sidebar-scroll:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+}
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* Print: A4 page with comfortable margins. The text size choice never changes the paper. */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+    html {
+        font-size: 16px !important;
+    }
+    body {
+        background: #fff;
+    }
+}
