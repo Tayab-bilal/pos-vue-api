@@ -1,2 +1,3 @@
 I am learning Git and GitHub.
 My POS project is connected to GitHub.
+I can update files directly on GitHub.
