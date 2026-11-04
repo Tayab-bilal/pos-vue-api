@@ -1,5 +1,0 @@
-I am learning Git and GitHub.
-My POS project is connected to GitHub.
-I can update files directly on GitHub.
-now i do practice to improve my knowledge.
-I am practicing Git commands step by step.
